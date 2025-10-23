@@ -244,9 +244,15 @@ class PagingSim {
       const cell = document.createElement("div");
       cell.className = "cell" + (page !== null ? " fill" : "");
       cell.setAttribute("data-i", String(i));
+      let rbitHtml = '';
+      if (page !== null) {
+        const pt = this.pageTable[page];
+        const r = pt && typeof pt.refBit === 'number' ? pt.refBit : 0;
+        rbitHtml = `<span class="rbit ${r ? 'r1' : 'r0'}" title="Bit de referência">R=${r}</span>`;
+      }
       cell.innerHTML = `
         <span class="idx">#${i}</span>
-        ${page === null ? `<div>livre</div>` : `<div class="pill">p${page}</div>`}
+        ${page === null ? `<div>livre</div>` : `${rbitHtml}<div class="pill">p${page}</div>`}
         <span class="tag">${page === null ? "—" : "quadro"}</span>
       `;
       ram.appendChild(cell);

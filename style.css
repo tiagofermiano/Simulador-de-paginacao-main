@@ -197,6 +197,10 @@ footer {
 /* Etiquetas nos quadros */
 .cell .idx{ position:absolute; top:6px; left:8px; font-size:11px; color:#777; }
 .cell .tag{ position:absolute; bottom:6px; right:8px; font-size:11px; color:#777; }
+/* Indicador do bit de referência R */
+.cell .rbit{ position:absolute; top:6px; right:8px; font-size:11px; padding:0 6px; border-radius:999px; border:1px solid #cfd8dc; background:#fff; font-weight:600; }
+.cell .rbit.r1{ background:#e8f5e9; border-color: var(--ram-hit-border); color:#1b5e20; }
+.cell .rbit.r0{ background:#ffebee; border-color: var(--ram-fault-border); color:#b71c1c; }
 
 /* Pílula da página pX */
 .pill{
