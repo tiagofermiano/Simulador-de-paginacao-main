@@ -1,0 +1,249 @@
+:root {
+  --bg: #ffffff;
+  --text: #222222;
+  --border: #cccccc;
+  --highlight: #05a300;
+  --title: #000000;
+  --error: #d32f2f;
+  --success: #388e3c;
+  --muted: #555555;
+  --light: #f8f8f8;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+h1, h2 {
+  color: var(--title);
+  margin-bottom: 10px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+input, select, button {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  /* width: 100%; */
+}
+
+button {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: var(--highlight);
+  color: white;
+  border-color: var(--highlight);
+}
+
+.primary { background: var(--highlight); color: white; border: none; }
+.secondary { background: var(--light); color: var(--text); border: 1px solid var(--border); }
+.ghost { background: transparent; border: 1px solid var(--border); }
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;  
+  align-items: center;     
+  gap: 10px;                
+  margin-top: 10px;
+}
+
+
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+/* Grades de memória */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  gap: 8px;
+}
+
+.cell {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  background: var(--light);
+  transition: 0.3s;
+}
+
+.cell.fill { background: #e3f2fd; }      /* Azul claro: quadro ocupado */
+.cell.hit { background: #c8e6c9; }       /* Verde: hit */
+.cell.fault { background: #ffcdd2; }     /* Vermelho: falta de página */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  border: 1px solid var(--border);
+  padding: 6px 8px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.table th {
+  background: var(--light);
+  color: var(--muted);
+}
+
+.log {
+  background: var(--light);
+  border: 1px solid var(--border);
+  padding: 10px;
+  height: 150px;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+footer {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+/* Layout responsivo */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+
+
+/* === RAM: paleta e estados (coerente com tema clean) === */
+:root{
+  --ram-occupied-bg: #e9f2ff;   /* azul clarinho: quadro ocupado */
+  --ram-hit-border:  #2e7d32;   /* verde: HIT */
+  --ram-fault-border:#c62828;   /* vermelho: FALTA */
+  --ram-neutral-bg:  #f9f9f9;
+  --ram-neutral-bd:  #cccccc;
+}
+
+/* Título + legenda alinhados */
+.box-title{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin-bottom:8px;
+}
+
+/* Legenda clean */
+.legend{display:flex; gap:12px; flex-wrap:wrap;}
+.legend .item{display:flex; align-items:center; gap:6px; font-size:13px; color:var(--muted);}
+.legend .dot{width:12px; height:12px; border-radius:999px; border:1px solid var(--ram-neutral-bd); background:var(--ram-neutral-bg);}
+.legend .dot.fill{background:var(--ram-occupied-bg); border-color:#b7cff1;}
+.legend .dot.hit{background:#e8f5e9; border-color:var(--ram-hit-border);}
+.legend .dot.fault{background:#ffebee; border-color:var(--ram-fault-border);}
+
+/* Grade de memória com colunas mais largas (melhor leitura) */
+.memory-grid{grid-template-columns:repeat(auto-fit,minmax(80px,1fr));}
+
+/* Células e estados */
+.cell{
+  position:relative;
+  border:1px solid var(--ram-neutral-bd);
+  border-radius:8px;
+  background:var(--ram-neutral-bg);
+  padding:10px 8px 12px;
+  text-align:center;
+  font-size:14px;
+  transition:.15s border-color ease, .15s box-shadow ease, .15s background-color ease;
+}
+.cell.fill{ background:var(--ram-occupied-bg); border-color:#b7cff1; }
+.cell.hit{  border-color:var(--ram-hit-border); box-shadow:0 0 0 2px rgba(46,125,50,.15) inset; }
+.cell.fault{border-color:var(--ram-fault-border); box-shadow:0 0 0 2px rgba(198,40,40,.15) inset; }
+
+/* Etiquetas nos quadros */
+.cell .idx{ position:absolute; top:6px; left:8px; font-size:11px; color:#777; }
+.cell .tag{ position:absolute; bottom:6px; right:8px; font-size:11px; color:#777; }
+
+/* Pílula da página pX */
+.pill{
+  display:inline-block; padding:2px 8px; border-radius:999px;
+  border:1px solid #cfd8dc; background:#fff; font-weight:600; font-size:13px;
+}
+
+/* === PATCH: Destaque visível para HIT / FAULT (sobrepõe azul do 'fill') === */
+.cell.hit{
+  background:#e8f5e9 !important;          /* verde claro durante o highlight */
+  border-color: var(--ram-hit-border, #2e7d32) !important;
+  box-shadow: 0 0 0 2px rgba(46,125,50,.15) inset;
+}
+.cell.fault{
+  background:#ffebee !important;           /* vermelho claro durante o highlight */
+  border-color: var(--ram-fault-border, #c62828) !important;
+  box-shadow: 0 0 0 2px rgba(198,40,40,.15) inset;
+}
+
+
+/* === Overlay de setas animadas (RAM <-> Disco) === */
+.arrow-layer{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100vh;
+  pointer-events:none;
+  z-index:999;
+}
+.arrow-path{
+  fill:none;
+  stroke-width:3;
+  stroke: #1976d2; /* azul padrão; pode ser sobrescrito via style */
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  marker-end:url(#arrowhead);
+  stroke-dasharray: 6 10;
+  animation: dash-move 800ms linear forwards;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.12));
+}
+
+@keyframes dash-move{
+  0% { stroke-dashoffset: 120; opacity: .0; }
+  15% { opacity: .95; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+/* cores semânticas para as direções */
+.arrow-in   { stroke: #2e7d32; } /* disco -> RAM (carregar) */
+.arrow-out  { stroke: #c62828; } /* RAM -> disco (swap out) */

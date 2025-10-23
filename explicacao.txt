@@ -1,0 +1,73 @@
+Introdução:
+
+O Simulador de Paginação representa de forma visual e interativa o funcionamento do gerenciamento de memória em sistemas operacionais, especificamente o mecanismo de paginação — um dos pilares da memória virtual.
+Ele mostra como páginas de um processo são trazidas do disco (armazenamento secundário) para a memória RAM (memória física), e como o sistema lida com faltas de página e substituições.
+
+Estrutura da Interface
+1. Disco (Memória Secundária)
+
+Representa o armazenamento em disco, onde todas as páginas lógicas do processo estão inicialmente guardadas.
+Cada célula simboliza uma página identificada como p0, p1, p2, etc.
+Visualmente, é o ponto de origem das páginas que serão carregadas para a RAM.
+
+2. Memória RAM (Quadros Físicos)
+
+Mostra os quadros físicos disponíveis na memória principal.
+Cada quadro pode conter uma página por vez.
+Quando um quadro está vazio, ele está disponível para receber uma página do disco.
+Quando todos estão cheios, o simulador precisa substituir uma página usando o algoritmo FIFO Second Chance (segunda chance).
+
+3. Tabela de Páginas
+
+Mapeia o endereço lógico de cada página para o seu endereço físico (quadro).
+Indica quais páginas estão atualmente na memória e quais estão no disco.
+É essencial para o sistema saber onde encontrar cada página quando solicitada.
+
+4. Log de Eventos
+
+Registra passo a passo o que ocorre a cada operação.
+Exemplo de mensagens:
+
+🟩 HIT – página 2 já está carregada (nenhuma ação necessária).
+🟥 FALTA – página 5 carregada no quadro livre 1.
+🟥 Substituição Second Chance – página 1 (R=0) saiu; página 6 entrou no quadro 0 (R=0 ou R=1).
+
+Essas mensagens ajudam a entender se o acesso foi um acerto (HIT) ou uma falta de página (PAGE FAULT).
+
+5. Controles de Execução
+
+Inicializar: prepara o simulador com um novo conjunto de páginas e quadros.
+Próximo passo: executa uma iteração manual, mostrando página por página.
+Auto ▶: executa automaticamente a sequência, útil para observar o comportamento contínuo.
+
+Funcionamento Lógico
+
+O processo solicita uma página.
+O simulador verifica se a página já está na RAM.
+Se estiver, é um HIT (acesso direto) - Se não estiver, ocorre uma FALTA DE PÁGINA.
+Falta de página (PAGE FAULT):
+Se houver quadro livre, a página é carregada do disco para a RAM.
+Se não houver, entra em ação o algoritmo de substituição FIFO Second Chance:
+- Cada página na fila possui um bit de referência R (0 ou 1).
+- Ao acessar (HIT), a página tem seu R definido para 1.
+- Durante a substituição, percorre-se a fila: páginas com R=1 ganham segunda chance (R é zerado e vão para o fim da fila); substitui-se a primeira encontrada com R=0.
+- Ao entrar na RAM, uma página recebe R aleatoriamente como 0 ou 1.
+
+Animações com setas:
+
+Uma seta verde indica entrada de uma página (disco → RAM).
+Uma seta vermelha indica saída (RAM → disco), simulando o “swap out”.
+Essas animações facilitam visualizar o fluxo de dados entre o disco e a memória — algo que normalmente é invisível no mundo real.
+
+🔍 Explicação das Cores e Símbolos
+Cor/Símbolo	             Significado	         Ação Visual
+🟩 Verde	                HIT	            Página já na RAM, sem movimentação.
+🟥 Vermelho	             PAGE FAULT	        Página carregada ou substituída.
+🟦 Azul	               Quadro ocupado	    Página residente em memória.
+🔺 Seta Vermelha    	 RAM → Disco        Página sendo substituída (swap out).
+🔻 Seta Verde	        Disco → RAM	        Página sendo carregada (swap in).
+
+Limites e Controles:
+- Máximo de quadros na RAM permitido no input: 6
+- Mínimo de páginas do programa permitido no input: 8
+- Botão "Limpar log" remove todo o histórico de eventos exibido

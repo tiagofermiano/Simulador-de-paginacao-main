@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simulador de Paginação – RAM, Tabela de Páginas e Swap</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+  <h1>Simulador de Paginação (FIFO Second Chance, por Demanda)</h1>
+
+    <div class="card" style="margin-bottom:18px">
+      <div class="controls">
+        <div>
+          <label for="numPages">Nº de páginas do programa</label>
+          <input id="numPages" type="number" min="8" value="10">
+        </div>
+        <div>
+          <label for="pageSize">Tamanho da página (KB)</label>
+          <input id="pageSize" type="number" min="1" value="4">
+        </div>
+        <div>
+          <label for="frames">Quadros na RAM</label>
+          <input id="frames" type="number" min="1" max="6" value="4">
+        </div>
+        <div>
+          <label for="refStr">Sequência de referências (páginas)</label>
+          <input id="refStr" type="text" placeholder="ex.:0,2,1,2...ou deixe vazio">
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <button class="primary" id="init">Inicializar</button>
+        <button class="secondary" id="step" disabled>Próximo passo (→)</button>
+        <button class="secondary" id="auto" disabled>Auto ▶</button>
+        <button class="ghost" id="pause" disabled>Pausar ⏸</button>
+  <button class="ghost" id="reset" disabled>Resetar</button>
+  <button class="ghost" id="clearLog" disabled>Limpar log</button>
+      </div>
+    </div>
+
+    <div class="grid grid-2">
+      <section class="card">
+        <div class="box-title">
+          <h2>RAM (quadros)</h2>
+          <div class="legend">
+            <div class="item"><span class="dot fill"></span><span>Quadro ocupado</span></div>
+            <div class="item"><span class="dot hit"></span><span>Acesso (HIT)</span></div>
+            <div class="item"><span class="dot fault"></span><span>Falta de página</span></div>
+          </div>
+        </div>
+        <div id="ram" class="memory-grid"></div>
+      </section>
+
+      <section class="card">
+        <div class="box-title">
+          <h2>Disco (swap + executável)</h2>
+          <span class="small">Mostra páginas que não estão na RAM.</span>
+        </div>
+        <div id="disk" class="memory-grid"></div>
+      </section>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:16px">
+      <section class="card">
+        <h2>Tabela de Páginas (ETP)</h2>
+        <table class="table" id="ptbl">
+          <thead>
+            <tr><th>Página</th><th>Quadro</th><th>Presente?</th><th>Observação</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2>Execução</h2>
+        <div class="row" style="margin-bottom:8px">
+          <span class="pill" id="curr">Próxima referência: —</span>
+          <span class="pill" id="stats">Passos: 0 · Hits: 0 · Faltas: 0 · Taxa de falta: 0%</span>
+        </div>
+        <div class="log" id="log" aria-live="polite"></div>
+      </section>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <!-- Camada de setas animadas (overlay) -->
+  <svg id="arrow-layer" class="arrow-layer" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"></svg>
+
+</body>
+</html>
