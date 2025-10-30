@@ -1,5 +1,7 @@
 Introdução:
 
+Sequencia de teste: 1,2,3,4,2,3,5,6,1,0
+
 O Simulador de Paginação representa de forma visual e interativa o funcionamento do gerenciamento de memória em sistemas operacionais, especificamente o mecanismo de paginação — um dos pilares da memória virtual.
 Ele mostra como páginas de um processo são trazidas do disco (armazenamento secundário) para a memória RAM (memória física), e como o sistema lida com faltas de página e substituições.
 
